@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import setUserEmail from '../actions/index';
+import { setUserEmail } from '../actions/index';
 
 class Login extends React.Component {
   constructor() {
@@ -11,6 +11,14 @@ class Login extends React.Component {
       email: '',
       senha: '',
     };
+  }
+
+  click = (event) => {
+    const { history, userEmail } = this.props;
+    const { email } = this.state;
+    event.preventDefault();
+    userEmail(email);
+    history.push('/carteira');
   }
 
   inputValue = ({ target: { value, name } }) => {
@@ -55,14 +63,7 @@ class Login extends React.Component {
             disabled={
               caractereSenha > senha.length || !vefifyEmail.test(email)
             }
-            onClick={ (event) => {
-              console.log('clicou');
-              const { history, setUserEmail } = this.props;
-              const { email } = this.state;
-              event.preventDefault();
-              setUserEmail(email);
-              history.push('/carteira');
-            } }
+            onClick={ this.click }
           >
             Entrar
           </button>
@@ -75,14 +76,14 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setUserEmail: (email) => dispatch(setUserEmail(email)),
+  userEmail: (email) => dispatch(setUserEmail(email)),
 });
 
 Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  setUserEmail: PropTypes.func.isRequired,
+  userEmail: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
