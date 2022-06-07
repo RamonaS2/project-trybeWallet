@@ -2,6 +2,7 @@
 export const SET_USER_EMAIL = 'SET_USER_EMAI';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const NOVO_OBJ = 'NOVO_OBJ';
+export const EXCLUI = 'EXCLUI';
 
 export const setUserEmail = (payload) => ({
   type: SET_USER_EMAIL,
@@ -39,3 +40,8 @@ export function fethApi(boleano = false, despesa) {
     }
   };
 }
+
+export const exclui = (des) => ({
+  type: EXCLUI,
+  des,
+});
