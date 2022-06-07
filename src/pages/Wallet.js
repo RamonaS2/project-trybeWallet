@@ -7,8 +7,8 @@ import Form from './Forms';
 
 class Wallet extends React.Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fethApi());
+    const { aEsperaDeUmMilagre } = this.props;
+    aEsperaDeUmMilagre();
   }
 
   render() {
@@ -23,7 +23,11 @@ class Wallet extends React.Component {
 }
 
 Wallet.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  aEsperaDeUmMilagre: PropTypes.func.isRequired,
 };
 
-export default connect(null, null)(Wallet);
+const mapDispatchToProps = (dispatch) => ({
+  aEsperaDeUmMilagre: () => dispatch(fethApi()),
+});
+
+export default connect(null, mapDispatchToProps)(Wallet);
